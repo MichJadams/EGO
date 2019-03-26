@@ -12,8 +12,8 @@ class test_convex_hull_test(unittest.TestCase):
             pass
     def test_creates_find_convex_hull(self):
         self.assertEqual(self.test([]),[], msg="returns an empty array when envoked with an empty array")
-    def test_less_than_three_points_passed_in(self:
-        self.assertEqual(self.test([[1,2],[2,2]]),[1,2],[2,2])
+    def test_less_than_three_points_passed_in(self):
+        self.assertEqual(self.test([[1,2],[2,2]]),[[1,2],[2,2]])
     def test_passed_three_points_returns_those(self):
         self.assertEqual(self.test([[1,2],[2,2],[4,5]]), [[1,2],[2,2],[4,5]])
     def test_includes_points_along_convex_hull(self):
