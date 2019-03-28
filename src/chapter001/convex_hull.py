@@ -1,5 +1,5 @@
 def findConvexHull(arrayOfPoints):
-    if len(arrayOfPoints) < 3:
+    if len(arrayOfPoints) <= 3:
         return arrayOfPoints
 
     memoCheckedTriangles = {}
@@ -7,20 +7,18 @@ def findConvexHull(arrayOfPoints):
     externalPoints = []
 
     for pointOne in arrayOfPoints:
-
         for pointTwo in arrayOfPoints:
             if pointTwo == pointOne:
                 continue
-
             for pointThree in arrayOfPoints:
                 if pointThree == pointTwo:
                     continue
                 for point in arrayOfPoints:
-
                     triangle = [pointOne, pointTwo, pointThree].sort()
                     if triangle not in memoCheckedTriangles:
                         memoCheckedTriangles[triangle] = True
-                        if (point not in memoCheckPoints
+                        pointHash = str(point)
+                        if (pointHash not in memoCheckPoints
                         and point != pointOne
                         and point != pointTwo
                         and point != pointThree):
@@ -28,7 +26,7 @@ def findConvexHull(arrayOfPoints):
                         # and it has not already been checked
                         # check it
                             isContained = triangleContains(point, [pointOne,pointTwo,pointThree])
-                            memoCheckPoints[point] = isContained
+                            memoCheckPoints[pointHash] = isContained
                         else:
                             continue
                     else:
