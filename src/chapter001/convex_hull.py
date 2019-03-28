@@ -40,5 +40,17 @@ def findConvexHull(arrayOfPoints):
     return externalPoints
 
 def isContained(point, triangle):
-    return true
+    outerArea = findTriangleArea(triangle)
+    innerArea = []
+    for index in range(0,triangle):
+        area = findTriangleArea(triangle[:index].append(point).append(trinalge[index:]))
+        innerArea.append(area)
+    if sum(innerArea) == outerArea:
+        return true
+    return false
+
+def findTriangleArea(triangle):
+    area = triangle[0][0](triangle[1][1] - triangle[2][1]) + triangle[1][0](triangle[2][1] - triangle[0][1]) + triangle[2][0](triangle[1][1] - triangle[0][1])
+    area = abs(area)
+    return area
 # checks if a point is contained in a triangle
