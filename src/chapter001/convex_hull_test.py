@@ -24,6 +24,16 @@ class test_convex_hull_test(unittest.TestCase):
         result = self.test(self.points)
         for point in self.containedPoints:
             self.assertNotIn(point, result, msg="internal coordinate, should not be included in outline")
-
+class test_isContained(unittest.TestCase):
+    def setUp(self):
+        try:
+            self.test = convex_hull.isContained
+            self.point = [1,1]
+            self.triangle = [[0,0],[2,0],[2,5]]
+        except NameError as e:
+            pass
+    def test_passed_contained_point(self):
+        self.assertEqual(self.test(self.point, self.triangle), True)
 if __name__ == '__main__':
+
     unittest.main()
