@@ -5,6 +5,6 @@ COPY requirements.txt /
 RUN pip install -r /requirements.txt
 
 COPY src/ /src
-WORKDIR /src/chapter001
+WORKDIR /src
 
-CMD ["python","-m","unittest","convex_hull_test.py","-v"]
+CMD ["cd"," convexHullNaive","python","-m","unittest","convex_hull_test.py","-v"]

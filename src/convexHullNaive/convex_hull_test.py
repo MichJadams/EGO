@@ -1,7 +1,7 @@
 import unittest
 import convex_hull
 
-class test_convex_hull_test(unittest.TestCase):
+class test_convex_hull(unittest.TestCase):
     def setUp(self):
         try:
             self.test = convex_hull.findConvexHull
