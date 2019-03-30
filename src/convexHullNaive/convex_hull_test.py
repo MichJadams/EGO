@@ -42,7 +42,9 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(False, True, 'the points returns were incorrect')
 
     def test_includes_points_along_convex_hull(self):
-        expected = self.testClass.findConvexHull(self.points)
+        expected = self.testClass.findConvexHull([[4,2],[1,3],[4,5],[2,5],[6,4],[4,7],[2,8]])
+        self.assertEqual(2, len(self.testClass.externalPoints))
+        self.assertEqual(5, len(expected), 'if passed less than 4 points, returns that list')
         for point in expected:
             x = point[0]
             y = point[1]
@@ -59,7 +61,7 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(True, False, msg="external coordinate, should be included in outline")
 
     def test_does_not_include_points_inside_convex_hull(self):
-        expected = self.test.findConvexHull(self.points)
+        expected = self.testClass.findConvexHull(self.points)
         for point in expected:
             x = point[0]
             y = point[1]
@@ -67,18 +69,8 @@ class convex_hull_test(unittest.TestCase):
                 self.assertEqual(False, True, 'the points returns were incorrect')
             if x == 2 and y == 5:
                 self.assertEqual(False, True, 'the points returns were incorrect')
-
-class test_isContained(unittest.TestCase):
-    def setUp(self):
-        try:
-            self.test = convex_hull.isContained
-            self.point = [1,1]
-            self.triangle = [[0,0],[2,0],[2,5]]
-        except NameError as e:
-            pass
-
-    def test_passed_contained_point(self):
-        self.assertEqual(self.test(self.point, self.triangle), True)
+    def test_isContained_true(self):
+        self.assertEqual(self.testClass.isContained([1,1],[[0,0],[2,0],[2,5]]), True)
 
 if __name__ == '__main__':
 
