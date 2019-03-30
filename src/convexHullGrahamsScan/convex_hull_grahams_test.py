@@ -16,4 +16,4 @@ class convex_hull_grahams_test(unittest.TestCase):
             y = point[1]
 if __name__ == '__main__':
 
-    unittest.main()            
+    unittest.main()

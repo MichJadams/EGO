@@ -2,9 +2,13 @@ FROM python:3.7-alpine
 
 COPY requirements.txt /
 
+USER root
+
 RUN pip install -r /requirements.txt
 
 COPY src/ /src
+COPY execute.sh /src
+
 WORKDIR /src
 
-CMD ["cd"," convexHullNaive","python","-m","unittest","convex_hull_test.py","-v"]
+ENTRYPOINT ["sh","/src/execute.sh"]
