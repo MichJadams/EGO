@@ -4,7 +4,7 @@ import convex_hull
 class convex_hull_test(unittest.TestCase):
     def setUp(self):
         try:
-            self.test = convex_hull.findConvexHull
+            self.testClass = convex_hull.convexHullNaive()
             self.points = [[4,2],[1,3],[4,5],[2,5],[6,4],[4,7],[2,8]]
             self.convexHullOutlinePoints = [[6,4],[4,7],[2,8],[1,3],[4,2]]
             self.containedPoints = [[4,5],[2,5]]
@@ -12,11 +12,11 @@ class convex_hull_test(unittest.TestCase):
             pass
 
     def test_creates_find_convex_hull(self):
-        expected = self.test([])
+        expected = self.testClass.findConvexHull([])
         self.assertEqual(0,len(expected), msg="returns an empty array when envoked with an empty array")
 
     def test_less_than_three_points_passed_in(self):
-        expected = self.test([[1,2],[2,2]])
+        expected = self.testClass.findConvexHull([[1,2],[2,2]])
         self.assertEqual(2, len(expected), 'if passed less than 3 points, returns that list')
         for point in expected:
             x = point[0]
@@ -28,7 +28,7 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(False, True, 'the points returns were incorrect')
 
     def test_passed_three_points_returns_those(self):
-        expected = self.test([[1,2],[2,2],[4,5]])
+        expected = self.testClass.findConvexHull([[1,2],[2,2],[4,5]])
         self.assertEqual(3, len(expected), 'if passed less than 4 points, returns that list')
         for point in expected:
             x = point[0]
@@ -42,7 +42,7 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(False, True, 'the points returns were incorrect')
 
     def test_includes_points_along_convex_hull(self):
-        expected = self.test(self.points)
+        expected = self.testClass.findConvexHull(self.points)
         for point in expected:
             x = point[0]
             y = point[1]
@@ -59,7 +59,7 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(True, False, msg="external coordinate, should be included in outline")
 
     def test_does_not_include_points_inside_convex_hull(self):
-        expected = self.test(self.points)
+        expected = self.test.findConvexHull(self.points)
         for point in expected:
             x = point[0]
             y = point[1]
