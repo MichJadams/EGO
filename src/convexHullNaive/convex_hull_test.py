@@ -42,8 +42,11 @@ class convex_hull_test(unittest.TestCase):
             self.assertEqual(False, True, 'the points returns were incorrect')
 
     def test_includes_points_along_convex_hull(self):
+        self.testClass = convex_hull.convexHullNaive()
         expected = self.testClass.findConvexHull([[4,2],[1,3],[4,5],[2,5],[6,4],[4,7],[2,8]])
-        self.assertEqual(2, len(self.testClass.externalPoints))
+        
+        self.assertEqual(7, len(self.testClass.memoCheckPoints.keys()))
+
         self.assertEqual(5, len(expected), 'if passed less than 4 points, returns that list')
         for point in expected:
             x = point[0]
