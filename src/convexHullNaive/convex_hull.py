@@ -17,7 +17,6 @@ class convexHullNaive():
         self.externalPoints = []
         if len(arrayOfPoints) <= 3:
             return arrayOfPoints
-        print("array", arrayOfPoints)
         for pointOne in arrayOfPoints:
             for pointTwo in arrayOfPoints:
                 if pointTwo == pointOne:
@@ -26,36 +25,30 @@ class convexHullNaive():
                 for pointThree in arrayOfPoints:
                     if pointThree == pointTwo or pointThree == pointOne:
                         continue
+                    triangle = [pointOne, pointTwo, pointThree]
+                    triangle.sort()
+                    if str(triangle) not in self.memoCheckedTriangles:
+                        self.memoCheckedTriangles[str(triangle)] = True
 
                     for point in arrayOfPoints:
-                        triangle = [pointOne, pointTwo, pointThree]
-                        triangle.sort()
-                        if str(triangle) not in self.memoCheckedTriangles:
+                        # if str(point) not in self.memoCheckPoints:
+                        if str(point) in self.memoCheckPoints and self.memoCheckPoints[str(point)] == True:
+                                    continue
+                        if point != pointOne:
+                            if point != pointTwo:
+                                if point != pointThree:
+                                #if the point is not part of the triangle being check
+                                # and it has not already been checked
+                                # check it
+                                    isContained = self.isContained(point, [pointOne,pointTwo,pointThree])
+                                    self.memoCheckPoints[str(point)] = isContained
 
-                            self.memoCheckedTriangles[str(triangle)] = True
-                            print("----------------------pointhask?", point)
-
-                            print("memo", self.memoCheckPoints)
-                            if str(point) not in self.memoCheckPoints:
-                                print("These are all the points ----->", point)
-                                print(pointOne, pointTwo, pointThree)
-                                if point != pointOne:
-                                    if point != pointTwo:
-                                        if point != pointThree:
-                                            print("got throught!", point)
-                                        #if the point is not part of the triangle being check
-                                        # and it has not already been checked
-                                        # check it
-                                            isContained = self.isContained(point, [pointOne,pointTwo,pointThree])
-                                            self.memoCheckPoints[str(point)] = isContained
-
-
-        print("memo", self.memoCheckPoints)
         for point in self.memoCheckPoints:
-            print("memo point", point)
-            if point == True:
-                self.externalPoints.push(point)
-
+          if self.memoCheckPoints[point] == False:
+              x = int(point[1])
+              y = int(point[4])
+              point = [x,y]
+              self.externalPoints.append(point)
         return self.externalPoints
 
     def isContained(self, point, triangle):
@@ -72,8 +65,8 @@ class convexHullNaive():
     def findTriangleArea(self,triangle):
         area = triangle[0][0]*(triangle[1][1] - triangle[2][1])
         areaOne = triangle[1][0]*(triangle[2][1] - triangle[0][1])
-        areaThree =  triangle[2][0]*(triangle[1][1] - triangle[0][1])
+        areaThree =  triangle[2][0]*(triangle[0][1] - triangle[1][1])
 
-        area = abs(area + areaOne + areaThree)
+        area = abs((area + areaOne + areaThree)/2)
         return area
 # checks if a point is contained in a triangle
