@@ -1,2 +1,4 @@
-def findConvexHullGrahams(points):
-    return points
+class ConvexHullGrahams():
+
+    def findConvexHullGrahams(self, points):
+        return points
