@@ -1,8 +1,12 @@
 TABLE OF CONTENTS:
+to docker file and tests enter:
+
+docker build -t ego . && docker run ego
+
 
 01.convex hull
-  - nieve
-  - Grhams Scan
+  - nieve (done)
+  - Grhams Scan ()
 02. Insertion sort
 03. Heap Sort
 04. Quicksort
