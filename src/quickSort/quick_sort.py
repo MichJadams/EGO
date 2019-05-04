@@ -1,0 +1,3 @@
+
+class quickSorterr:
+    pass
